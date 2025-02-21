@@ -35,7 +35,7 @@
       ]
     ],
     "splash": {
-      "image": "./lotus.png",
+      "image": "./lotus.svg",
       "resizeMode": "contain"
     },
     "experiments": {
