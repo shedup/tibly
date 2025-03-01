@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
-// import OAuth from "@/components/OAuth";
+import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, router, useRouter } from "expo-router";
@@ -61,11 +61,12 @@ const SignIn = () => {
         <View className="flex-1 bg-white">
           <View className="relative w-full h-[200px]">
             <Image
-              className="z-0 w-full h-[250px] "
-              source={images.signUpCar}
+              className="z-0 w-full h-[180px]"
+              resizeMode="contain"
+              source={images.lotus}
             ></Image>
-            <Text className="font-JakartaSemiBold text-2xl text-black bottom-14 left-5">
-              Welcome
+            <Text className="font-JakartaBold text-3xl text-black  left-5">
+              Welcome back!
             </Text>
           </View>
           <View className="p-5">
@@ -81,7 +82,7 @@ const SignIn = () => {
             <InputField
               label="Password"
               placeholder="Enter your password"
-              icon={icons.password}
+              icon={icons.lock}
               value={form.password}
               secureTextEntry={true}
               onChangeText={(value) => {
@@ -94,7 +95,7 @@ const SignIn = () => {
               className="mt-6"
             />
 
-            {/* <OAuth /> */}
+            <OAuth />
 
             <Link
               href="/sign-up"

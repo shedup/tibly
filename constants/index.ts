@@ -6,7 +6,7 @@ import checkmark from "@/assets/icons/check.png";
 import close from "@/assets/icons/close.png";
 import dollar from "@/assets/icons/dollar.png";
 import email from "@/assets/icons/email.png";
-import eyecross from "@/assets/icons/eyecross.png";
+import password from "@/assets/icons/eyecross.png";
 import google from "@/assets/icons/google.png";
 import home from "@/assets/icons/home.png";
 import list from "@/assets/icons/list.png";
@@ -31,6 +31,7 @@ import onboarding1 from "@/assets/images/welcome-1.png";
 import onboarding2 from "@/assets/images/welcome-2.png";
 import onboarding3 from "@/assets/images/welcome-3.png";
 import signUpCar from "@/assets/images/signup-car.png";
+import lotus from "@/assets/images/lotus.png";
 
 export const images = {
   onboarding1,
@@ -41,6 +42,7 @@ export const images = {
   check,
   noResult,
   message,
+  lotus,
 };
 
 export const icons = {
@@ -52,7 +54,7 @@ export const icons = {
   close,
   dollar,
   email,
-  eyecross,
+  password,
   google,
   home,
   list,

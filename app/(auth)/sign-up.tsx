@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
-// import OAuth from "@/components/OAuth";
+import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
 import { Link, router } from "expo-router";
 import { useState } from "react";
@@ -114,10 +114,11 @@ const SignUp = () => {
         <View className="flex-1 bg-white">
           <View className="relative w-full h-[200px]">
             <Image
-              className="z-0 w-full h-[250px] "
-              source={images.signUpCar}
+              className="z-0 w-full h-[180px]"
+              resizeMode="contain"
+              source={images.lotus}
             ></Image>
-            <Text className="font-JakartaSemiBold text-2xl text-black bottom-14 left-5">
+            <Text className="font-JakartaBold text-3xl text-black  left-5">
               Create Your Account
             </Text>
           </View>
@@ -134,7 +135,7 @@ const SignUp = () => {
             <InputField
               label="Email"
               placeholder="Enter your email"
-              icon={icons.emailAddress}
+              icon={icons.email}
               value={form.emailAddress}
               onChangeText={(value) => {
                 setForm({ ...form, emailAddress: value });
@@ -143,7 +144,7 @@ const SignUp = () => {
             <InputField
               label="Password"
               placeholder="Enter your password"
-              icon={icons.password}
+              icon={icons.lock}
               value={form.password}
               secureTextEntry={true}
               onChangeText={(value) => {
@@ -156,7 +157,7 @@ const SignUp = () => {
               className="mt-6"
             />
 
-            {/* <OAuth /> */}
+            <OAuth />
 
             <Link
               href="/sign-in"

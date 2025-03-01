@@ -45,7 +45,6 @@ const InputField = ({
             secureTextEntry={secureTextEntry}
             {...props}
           />
-          <Text className="text-red-500">Hello</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
