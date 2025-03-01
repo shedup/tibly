@@ -8,6 +8,10 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "jsEngine": "hermes",
+    "experimental": {
+      "bridgeless": false
+    },
     "ios": {
       "supportsTablet": true
     },

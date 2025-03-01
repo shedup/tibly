@@ -40,11 +40,12 @@ const InputField = ({
             <Image source={icon} className={`w-6 h-6 ml-4 ${iconStyle} `} />
           )}
           <TextInput
-            className={`rounded-full p-4 font-JakartaSemiBold text-[15px]
+            className={`rounded-full  p-4 font-JakartaSemiBold text-[15px]
               flex-1 ${inputStyle} text-left`}
             secureTextEntry={secureTextEntry}
             {...props}
           />
+          <Text className="text-red-500">Hello</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
