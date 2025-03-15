@@ -1,11 +1,11 @@
 // Layout for the tabs
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text } from 'react-native';
+import React from 'react';
 
 const _layout = () => {
   return (
     <View>
-      <Text>_layout</Text>
+      <Text>Home</Text>
     </View>
   );
 };
