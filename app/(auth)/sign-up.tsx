@@ -34,6 +34,7 @@ const SignUp = () => {
 
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
+    console.log("HERE", isLoaded);
     if (!isLoaded) return;
 
     // Start sign-up process using email and password provided

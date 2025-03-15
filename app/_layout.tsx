@@ -1,15 +1,17 @@
 // Navigation structure which are nested.
+import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { SplashScreen, Stack } from "expo-router";
 
 import "../global.css";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-// import { tokenCache } from "@/cache";
+import { tokenCache } from "@/cache";
+import { ActivityIndicator, Text, View } from "react-native";
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+  console.log("HERE", publishableKey);
   if (!publishableKey) {
     throw new Error(
       "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
@@ -29,17 +31,20 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+  console.log("LOD", loaded);
 
   if (!loaded) {
     return null;
   }
   return (
-    <ClerkProvider publishableKey={publishableKey}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />;
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />;
-        <Stack.Screen name="(root)" options={{ headerShown: false }} />;
-      </Stack>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ClerkLoaded>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />;
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />;
+          <Stack.Screen name="(root)" options={{ headerShown: false }} />;
+        </Stack>
+      </ClerkLoaded>
     </ClerkProvider>
   );
 }
