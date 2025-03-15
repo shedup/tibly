@@ -1,3 +1,41 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+app-example
 # Logs
 logs
 *.log
@@ -128,3 +166,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+<<<<<<< HEAD
+=======
+>>>>>>> 43d73ff25ada563bb379f7d63b27f05efa8ed241
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
+>>>>>>> 273695fcdadc1a39cf5191ab7f9ccbf1734efa2c
