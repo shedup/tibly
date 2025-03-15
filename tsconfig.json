@@ -3,7 +3,13 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
+<<<<<<< HEAD
       "@/*": ["./*"]
+=======
+      "@/*": [
+        "./*"
+      ]
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
     }
   },
   "include": [
@@ -11,7 +17,13 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
+<<<<<<< HEAD
     "babel.config.js",
     "nativewind-env.d.ts"
   ]
 }
+=======
+    "nativewind-env.d.ts"
+  ]
+}
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03

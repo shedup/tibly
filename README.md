@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+=======
+# Welcome to Tibly
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
 
 ## Get started
 

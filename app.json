@@ -4,24 +4,40 @@
     "slug": "tibly",
     "version": "1.0.0",
     "orientation": "portrait",
+<<<<<<< HEAD
     "icon": "./assets/images/icon.png",
+=======
+    "icon": "./lotus.png",
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+<<<<<<< HEAD
       "supportsTablet": true,
       "bundleIdentifier": "com.shedup.tibly"
+=======
+      "supportsTablet": true
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+<<<<<<< HEAD
       },
       "package": "com.shedup.tibly"
     },
     "web": {
       "bundler": "metro",
       "output": "server",
+=======
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -29,13 +45,24 @@
       [
         "expo-splash-screen",
         {
+<<<<<<< HEAD
           "image": "./assets/images/splash-icon.png",
+=======
+          "image": "./lotus.png",
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
       ]
     ],
+<<<<<<< HEAD
+=======
+    "splash": {
+      "image": "./lotus.svg",
+      "resizeMode": "contain"
+    },
+>>>>>>> d3a0859e56b50e0e3d2e211d1fbaae3c7b8f3e03
     "experiments": {
       "typedRoutes": true
     }
