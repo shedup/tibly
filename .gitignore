@@ -31,6 +31,9 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
+expo-end.d.ts
+.prettierrc
 
 # typescript
 *.tsbuildinfo
