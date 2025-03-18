@@ -1,9 +1,9 @@
-import CustomButton from "@/components/CustomButton";
-import InputField from "@/components/InputField";
-import OAuth from "@/components/OAuth";
-import { icons, images } from "@/constants";
-import { Link, router } from "expo-router";
-import { useState } from "react";
+import CustomButton from '@/components/CustomButton';
+import InputField from '@/components/InputField';
+import OAuth from '@/components/OAuth';
+import { icons, images } from '@/constants';
+import { Link, router } from 'expo-router';
+import { useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -13,28 +13,28 @@ import {
   TouchableOpacity,
   View,
   Alert,
-} from "react-native";
-import { useSignUp } from "@clerk/clerk-expo";
-import { ReactNativeModal } from "react-native-modal";
+} from 'react-native';
+import { useSignUp } from '@clerk/clerk-expo';
+import { ReactNativeModal } from 'react-native-modal';
 // import { fetchAPI } from "@/lib/fetch";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [showSuccessModal, setshowSuccessModal] = useState(false); // in react native, cannot show two modals at same time.
   const [form, setForm] = useState({
-    name: "",
-    emailAddress: "",
-    password: "",
+    name: '',
+    emailAddress: '',
+    password: '',
   });
   const [verification, setVerification] = useState({
-    state: "default",
-    error: "",
-    code: "",
+    state: 'pending',
+    error: '',
+    code: '',
   });
 
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded) return;
+    if (!isLoaded) return; // Clerk loaded
 
     // Start sign-up process using email and password provided
     try {
@@ -45,24 +45,23 @@ const SignUp = () => {
       });
 
       // Send user an email with verification code
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
 
       // Set 'pendingVerification' to true to display second form
       // and capture OTP code
       setVerification({
         ...verification,
-        state: "pending",
+        state: 'pending',
       });
     } catch (err: any) {
-      Alert.alert("Error", err.errors[0].longMessage);
+      Alert.alert('Error', err.errors[0].longMessage);
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
   // Handle submission of verification form
   const onVerifyPress = async () => {
-    console.log("HERE", isLoaded);
-    console.log("form values: " + JSON.stringify(form));
+    console.log('form values: ' + JSON.stringify(form));
     if (!isLoaded) return;
 
     try {
@@ -73,8 +72,8 @@ const SignUp = () => {
 
       // If verification was completed, set the session to active
       // and redirect the user
-      console.log("User successfully signed up:", signUpAttempt);
-      if (signUpAttempt.status === "complete") {
+      console.log('User successfully signed up:', signUpAttempt);
+      if (signUpAttempt.status === 'complete') {
         // TODO: Create user's profile data in neondb
         // await fetchAPI("/(api)/user", {
         //   method: "POST",
@@ -84,14 +83,14 @@ const SignUp = () => {
         //     clerkId: signUpAttempt.createdUserId,
         //   }),
         // });
-        // await setActive({ session: signUpAttempt.createdSessionId });
-        // // router.replace("/");
-        // setVerification({ ...verification, state: "success" });
+        await setActive({ session: signUpAttempt.createdSessionId });
+        router.replace('/');
+        setVerification({ ...verification, state: 'success' });
       } else {
         setVerification({
           ...verification,
-          state: "failed",
-          error: "Verification failed.",
+          state: 'failed',
+          error: 'Verification failed.',
         });
       }
     } catch (err: any) {
@@ -99,7 +98,7 @@ const SignUp = () => {
       // for more info on error handling
       setVerification({
         ...verification,
-        state: "failed",
+        state: 'failed',
         error: err.errors[0].longMessage,
       });
     }
@@ -108,7 +107,7 @@ const SignUp = () => {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView className="flex-1 bg-white">
         <View className="flex-1 bg-white">
@@ -168,17 +167,28 @@ const SignUp = () => {
             </Link>
           </View>
           <ReactNativeModal
-            isVisible={verification.state == "pending"}
+            isVisible={verification.state == 'pending'}
             onModalHide={() => {
-              if (verification.state == "success") setshowSuccessModal(true);
+              if (verification.state == 'success') setshowSuccessModal(true);
             }}
           >
             <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+              <TouchableOpacity
+                onPress={() => {
+                  setVerification((prev) => ({ ...prev, state: 'default' }));
+                }}
+                style={{ alignSelf: 'flex-end' }}
+              >
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>✖</Text>
+              </TouchableOpacity>
               <Text className="text-2xl font-JakartaExtraBold mb-2 text-center">
                 Verification
               </Text>
               <Text className="font-Jakarta mb-5">
-                We've sent a verification code to {form.emailAddress}
+                We've sent a verification code to{' '}
+                {form.emailAddress && form.emailAddress !== ''
+                  ? form.emailAddress
+                  : 'the user.'}
               </Text>
               <InputField
                 label="Code"
@@ -219,7 +229,7 @@ const SignUp = () => {
               <CustomButton
                 title="Browse Home"
                 onPress={() => {
-                  router.push("/(root)/(tabs)/home");
+                  router.push('/(root)/(tabs)/home');
                   setshowSuccessModal(false);
                 }}
                 className="mt-5"

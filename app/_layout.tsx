@@ -11,7 +11,6 @@ import { ActivityIndicator, Text, View } from 'react-native';
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
-  console.log('HERE', publishableKey);
   if (!publishableKey) {
     throw new Error(
       'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env'
@@ -31,6 +30,7 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+  console.log('HERE', loaded);
   if (!loaded) {
     return null;
   }
