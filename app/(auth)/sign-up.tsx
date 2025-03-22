@@ -32,12 +32,23 @@ const SignUp = () => {
     code: '',
   });
 
+  // Validation
+  const [validationErrors, setValidationErrors] = useState({
+    name: '',
+    emailAddress: '',
+    password: '',
+    code: '',
+  });
+
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
     if (!isLoaded) return; // Clerk loaded
 
     // Start sign-up process using email and password provided
     try {
+      validateField('name', form.name);
+      validateField('emailAddress', form.emailAddress);
+      validateField('password', form.password);
       await signUp.create({
         emailAddress: form.emailAddress,
         password: form.password,
@@ -54,7 +65,7 @@ const SignUp = () => {
         state: 'pending',
       });
     } catch (err: any) {
-      Alert.alert('Error', err.errors[0].longMessage);
+      // Alert.alert('Error', err.errors[0].longMessage);
       console.error(JSON.stringify(err, null, 2));
     }
   };
@@ -66,9 +77,11 @@ const SignUp = () => {
 
     try {
       // Use the code the user provided to attempt verification
+      console.log('HERE');
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
         code: verification.code,
       });
+      console.log('AFTER');
 
       // If verification was completed, set the session to active
       // and redirect the user
@@ -96,12 +109,52 @@ const SignUp = () => {
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
+      console.log('FAILED');
       setVerification({
         ...verification,
-        state: 'failed',
+        state: 'pending',
         error: err.errors[0].longMessage,
       });
     }
+  };
+
+  const validateField = (field: string, value: string) => {
+    let error = '';
+
+    switch (field) {
+      case 'name':
+        if (!value) {
+          error = 'Username is required.';
+        } else if (value.length < 4) {
+          error = 'Username must be at least 4 characters.';
+        }
+        break;
+      case 'emailAddress':
+        if (!value) {
+          error = 'Email is required.';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Invalid email address.';
+        }
+        break;
+      case 'password':
+        if (!value) {
+          error = 'Password is required.';
+        } else if (value.length < 8) {
+          error = 'Password must be at least 8 characters.';
+        }
+        break;
+      case 'code':
+        if (!value) {
+          error = 'Code is required.';
+        } else if (value.length != 6) {
+          error = 'Code must be 6 characters.';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setValidationErrors((prev) => ({ ...prev, [field]: error }));
   };
 
   return (
@@ -130,7 +183,13 @@ const SignUp = () => {
               onChangeText={(text) => {
                 setForm({ ...form, name: text });
               }}
+              onBlur={() => validateField('name', form.name)}
             />
+            {validationErrors.name ? (
+              <Text className="text-red-500 text-sm">
+                {validationErrors.name}
+              </Text>
+            ) : null}
             <InputField
               label="Email"
               placeholder="Enter your email"
@@ -139,7 +198,14 @@ const SignUp = () => {
               onChangeText={(value) => {
                 setForm({ ...form, emailAddress: value });
               }}
+              autoCapitalize="none"
+              onBlur={() => validateField('emailAddress', form.emailAddress)}
             />
+            {validationErrors.emailAddress ? (
+              <Text className="text-red-500 text-sm">
+                {validationErrors.emailAddress}
+              </Text>
+            ) : null}
             <InputField
               label="Password"
               placeholder="Enter your password"
@@ -149,7 +215,13 @@ const SignUp = () => {
               onChangeText={(value) => {
                 setForm({ ...form, password: value });
               }}
+              onBlur={() => validateField('password', form.password)}
             />
+            {validationErrors.password ? (
+              <Text className="text-red-500 text-sm">
+                {validationErrors.password}
+              </Text>
+            ) : null}
             <CustomButton
               title="Sign Up"
               onPress={onSignUpPress}
@@ -199,12 +271,13 @@ const SignUp = () => {
                 onChangeText={(code) =>
                   setVerification({ ...verification, code })
                 }
+                onBlur={() => validateField('code', verification.code)}
               />
-              {verification.error && (
-                <Text className="text-red-500 text-sm mt-1">
-                  {verification.error}
+              {validationErrors.code ? (
+                <Text className="text-red-500 text-sm">
+                  {validationErrors.code}
                 </Text>
-              )}
+              ) : null}
 
               <CustomButton
                 title="Verify"

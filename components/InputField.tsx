@@ -7,8 +7,8 @@ import {
   TextInput,
   Platform,
   Keyboard,
-} from "react-native";
-import React from "react";
+} from 'react-native';
+import React from 'react';
 
 const InputField = ({
   label,
@@ -43,6 +43,7 @@ const InputField = ({
             className={`rounded-full  p-4 font-JakartaSemiBold text-[15px]
               flex-1 ${inputStyle} text-left`}
             secureTextEntry={secureTextEntry}
+            autoCorrect={false}
             {...props}
           />
         </View>
